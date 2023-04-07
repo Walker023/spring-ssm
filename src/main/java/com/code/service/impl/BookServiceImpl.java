@@ -1,7 +1,10 @@
 package com.code.service.impl;
 
+import com.code.controller.Code;
 import com.code.dao.BookDao;
 import com.code.domain.Book;
+import com.code.exception.BusinessException;
+import com.code.exception.SystemException;
 import com.code.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,9 @@ public class BookServiceImpl implements BookService {
     }
 
     public boolean delete(Integer id) {
+        if(id == 1) {
+            throw new BusinessException(Code.BUSINESS_ERR,"id不能为1");
+        }
         bookDao.delete(id);
         return true;
     }
